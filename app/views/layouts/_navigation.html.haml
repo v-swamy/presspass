@@ -1,0 +1,30 @@
+.navbar.navbar-default.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      =link_to "Presspass", root_path, class: "navbar-brand"
+    #navbar.collapse.navbar-collapse
+      - if logged_in?
+        %form.navbar-form.navbar-right
+          .form-group
+            = link_to current_user, class: "btn btn-default form-control view-profile" do
+              View Profile
+              %i.glyphicon.glyphicon-user
+            = link_to sign_out_path, class: "btn btn-danger form-control" do
+              Sign Out
+              %i.glyphicon.glyphicon-log-out
+      - else
+        = form_tag sign_in_path, class: "form navbar-form navbar-right" do
+          .form-group
+            = text_field_tag :email, params[:email] || "", placeholder: "Email", class: "form-control"
+          .form-group
+            = password_field_tag :password, params[:password] || "", placeholder: "Password", class: "form-control"
+          = button_tag(type: "submit", class: "btn btn-info form-control") do
+            %span.glyphicon.glyphicon-log-in
+            Sign In
+
+ 
