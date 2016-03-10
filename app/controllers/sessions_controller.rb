@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  def new
+  end
+
   def create
     user = User.find_by(email: params[:email])
 
@@ -9,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = "There is something wrong with your email or password."
-      redirect_to root_path
+      redirect_to sign_in_path
     end
   end
 

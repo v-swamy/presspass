@@ -1,203 +1,170 @@
-// Sandstone 3.3.5
+// Simplex 3.3.5
 // Bootswatch
 // -----------------------------------------------------
 
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500");
+$web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:400,700" !default;
+@import url($web-font-path);
+
+@mixin btn-shadow($color){
+  @include gradient-vertical-three-colors(lighten($color, 3%), $color, 6%, darken($color, 3%));
+  filter: none;
+  border: 1px solid darken($color, 10%);
+}
 
 // Navbar =====================================================================
 
-.sandstone {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
 .navbar {
-  .nav > li > a {
-    @extend .sandstone;
-  }
 
-  &-form input,
-  &-form .form-control {
-    border: none;
-  }
-}
+  &-inverse {
 
-
-// Buttons ====================================================================
-
-.btn {
-  border: none;
-  @extend .sandstone;
-
-  &:hover {
-    border-color: transparent;
-  }
-
-  &-lg {
-    line-height: 26px;
-  }
-
-  &-default {
-    &:hover {
-      background-color: $navbar-default-link-active-bg;
+    .badge {
+      background-color: #fff;
+      color: $brand-primary;
     }
   }
 }
 
+// Buttons ====================================================================
+
+.btn {
+  font-family: $headings-font-family;
+}
+
+.btn-default,
+.btn-default:hover {
+  @include btn-shadow($btn-default-bg);
+}
+
+.btn-primary,
+.btn-primary:hover {
+  @include btn-shadow($btn-primary-bg);
+}
+
+.btn-success,
+.btn-success:hover {
+  @include btn-shadow($btn-success-bg);
+}
+
+.btn-info,
+.btn-info:hover {
+  @include btn-shadow($btn-info-bg);
+}
+
+.btn-warning,
+.btn-warning:hover {
+  @include btn-shadow($btn-warning-bg);
+}
+
+.btn-danger,
+.btn-danger:hover {
+  @include btn-shadow($btn-danger-bg);
+}
+
 // Typography =================================================================
+
+body {
+  font-weight: 200;
+}
 
 // Tables =====================================================================
 
+th {
+  color: $headings-color;
+}
+
 // Forms ======================================================================
 
-input,
-.form-control {
-  @include box-shadow(none);
+legend {
+  color: $headings-color;
+}
 
-  &:focus {
-    border-color: $input-border;
-    @include box-shadow(none);
+label {
+  font-weight: normal;
+}
+
+.has-warning {
+  .help-block,
+  .control-label,
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline,
+  &.radio label,
+  &.checkbox label,
+  &.radio-inline label,
+  &.checkbox-inline label,
+  .form-control-feedback {
+    color: $brand-danger;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: $brand-danger;
+  }
+}
+
+.has-error {
+  .help-block,
+  .control-label,
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline,
+  &.radio label,
+  &.checkbox label,
+  &.radio-inline label,
+  &.checkbox-inline label,
+  .form-control-feedback {
+    color: $brand-primary;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: $brand-primary;
+  }
+}
+
+.has-success {
+  .help-block,
+  .control-label,
+  .radio,
+  .checkbox,
+  .radio-inline,
+  .checkbox-inline,
+  &.radio label,
+  &.checkbox label,
+  &.radio-inline label,
+  &.checkbox-inline label,
+  .form-control-feedback {
+    color: $brand-success;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: $brand-success;
   }
 }
 
 // Navs =======================================================================
 
-.nav {
-  @extend .sandstone;
-
-  .open > a,
-  .open > a:hover,
-  .open > a:focus {
-    border-color: $gray-light;
-  }
-}
-
-.nav-tabs {
-
-  & > li > a {
-    background-color: $gray-lighter;
-    border-color: $nav-tabs-border-color;
-    color: $gray;
-  }
-
-  > li.disabled > a:hover {
-    background-color: $gray-lighter;
-  }
-}
-
-.nav-pills {
-  a {
-    color: $gray;
-  }
-
-  li > a {
-    border: 1px solid transparent;
-  }
-
-  li.active > a,
-  li > a:hover {
-    border-color: $gray-light;
-  }
-
-  li.disabled > a {
-    border-color: transparent;
-  }
-}
-
-.breadcrumb {
-  @extend .sandstone;
-
-  border: 1px solid $gray-light;
-
-  a {
-    color: $gray;
-  }
-}
-
-.pagination {
-  @extend .sandstone;
-}
-
 .pager {
-  @extend .sandstone;
-
-  li > a {
-    color: $gray;
+  a {
+    color: $headings-color;
   }
-}
 
-.dropdown-menu {
-  & > li > a {
-    @extend .sandstone;
+  a:hover,
+  .active > a, {
+    border-color: $brand-primary;
+    color: #fff;
+  }
+
+  .disabled > a {
+    border-color: $pager-border;
   }
 }
 
 // Indicators =================================================================
 
-.alert {
-
-  a,
-  .alert-link {
-    color: #fff;
-  }
-}
-
-.tooltip {
-  @extend .sandstone;
-}
-
 // Progress bars ==============================================================
 
-.progress {
-  border-radius: 10px;
-  background-color: $gray-light;
-  @include box-shadow(none);
-
-  &-bar {
-    @include box-shadow(none);
-  }
-}
-
 // Containers =================================================================
-
-.list-group {
-  &-item {
-    padding: 16px 24px;
-  }
-}
-
-.well {
-  @include box-shadow(none);
-}
-
-.panel {
-  @include box-shadow(none);
-
-  .panel-heading,
-  .panel-title {
-    @extend .sandstone;
-    color: #fff;
-  }
-
-  .panel-footer {
-    @extend .sandstone;
-  }
-
-  &-default {
-    .panel-heading,
-    .panel-title,
-    .panel-footer {
-      color: $gray;
-    }
-  }
-}
-
-.index-header {
-  margin-top: 10px
-}
-
-.form-control {
-  width: 300px
-}
