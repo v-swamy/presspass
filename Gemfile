@@ -17,6 +17,9 @@ gem 'sidekiq'
 gem 'twilio-ruby'
 gem 'figaro'
 gem 'sinatra', :require => nil
+gem 'houston'
+gem 'redis'
+gem 'stripe'
 
 group :development do
   gem 'thin'

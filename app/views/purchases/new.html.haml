@@ -1,0 +1,58 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+<script type="text/javascript">
+Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+</script>
+
+.row
+  .col-sm-10
+    %h2 Purchase demo
+.row
+  .col-sm-10
+    .well
+      = bootstrap_form_tag(url: '/purchase', label_col: "col-sm-2", control_col: "col-sm-6", html: {id: "payment-form"}) do |f|
+        = f.alert_message "Please fix the errors below."
+        %header
+          %h4 Regular purchase form
+        = f.email_field :email
+        = f.text_field :name
+        %fieldset.credit_card
+          %span.payment-errors
+          .form-group
+            %label.control-label(for='credit-card-number') Credit Card Number
+            %input.form-control#credit-card-number(type="text" data-stripe="number")
+          .form-group
+            %label.control-label(for="security-code") Security Code
+            %input.form-control#security-code(type="text" data-stripe="cvc")
+          .form-group
+            %label.control-label Expiration
+            = select_month(Date.today, {add_month_numbers: true},  class: 'form-control', data: {stripe: "exp-month"})
+            = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'form-control', data: {stripe: "exp-year"})
+        %fieldset.actions.control-group
+          .controls
+            %input(type="submit" value="Purchase" class="btn btn-default")
+.row
+  .col-sm-10
+    .well
+      = bootstrap_form_tag(url: '/presspass/purchase', html: {id: "presspass-purchase"}) do |f|
+        %header
+          %h4 Presspass purchase
+        = f.email_field :email
+        = f.submit "Purchase with Presspass"
+.modal.fade#PresspassValidate(tabindex="-1" role="dialog" aria-labelledby="PresspassValidate")
+  .modal-dialog(role="document")
+    .modal-content
+      %form#presspass-validate-purchase(role="form" action="/purchase_with_presspass" method="post")
+        = hidden_field_tag :authenticity_token, form_authenticity_token
+        .modal-header
+          %button.close(type="button" data-dismiss="modal" aria-label="Close")
+            %span(aria-hidden="true")
+              &times;
+          %h4.modal-title#PresspassValidate Check iPhone
+        .modal-body
+          %header
+            %h4 Presspass notification sent!
+          %p Click 'OK' after submitting your payment with Apple Pay.
+        .modal-footer
+          %input(type="submit" value="OK" class="btn btn-default")
+

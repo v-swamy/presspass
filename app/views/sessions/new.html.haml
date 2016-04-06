@@ -11,13 +11,59 @@
         = f.email_field :email
         = f.password_field :password
         = f.submit "Log In"
+/ .row
+/   .col-sm-10
+/     .well
+/       = bootstrap_form_tag url: '/presspass/sign_in' do |f|
+/         = f.alert_message "Please fix the errors below."
+/         %header
+/           %h4 Presspass login
+/         = f.email_field :email
+/         = f.submit "Log In With Presspass"
 .row
   .col-sm-10
     .well
-      = bootstrap_form_tag url: '/presspass/sign_in' do |f|
-        = f.alert_message "Please fix the errors below."
-        %header
-          %h4 Regular login
-        = f.email_field :email
-        = f.password_field :password
-        = f.submit "Log In With Presspass"
+      %header
+        %h4 Presspass login
+      %button.btn.btn-default(data-toggle="modal" data-target="#PresspassModal")
+        Log in with Presspass
+.modal.fade#PresspassModal(tabindex="-1" role="dialog" aria-labelledby="PresspassLogin")
+  .modal-dialog(role="document")
+    .modal-content
+      = bootstrap_form_tag(url: '/presspass/sign_in', html: {id: "presspass-form"}) do |f|
+        .modal-header
+          %button.close(type="button" data-dismiss="modal" aria-label="Close")
+            %span(aria-hidden="true")
+              &times;
+          %h4.modal-title#PresspassLogin Login with Presspass
+        .modal-body   
+          = f.alert_message "Please fix the errors below."
+          %header
+            %h4 Please enter your email below:
+          = f.email_field :email
+        .modal-footer
+          = f.submit "Log In With Presspass"
+.modal.fade#PresspassValidate(tabindex="-1" role="dialog" aria-labelledby="PresspassValidate")
+  .modal-dialog(role="document")
+    .modal-content
+      %form#presspass-validate(role="form" action="/sign_in_with_presspass" method="post")
+        = hidden_field_tag :authenticity_token, form_authenticity_token
+        .modal-header
+          %button.close(type="button" data-dismiss="modal" aria-label="Close")
+            %span(aria-hidden="true")
+              &times;
+          %h4.modal-title#PresspassValidate Check iPhone
+        .modal-body
+          %header
+            %h4 Presspass notification sent!
+          %p Click 'OK' after opening your notification.
+        .modal-footer
+          %input(type="submit" value="OK" class="btn btn-default")
+          
+          / = f.submit "OK" 
+
+
+
+
+
+

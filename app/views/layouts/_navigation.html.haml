@@ -18,13 +18,13 @@
               Sign Out
               %i.glyphicon.glyphicon-log-out
       - else
-        = form_tag sign_in_path, class: "form navbar-form navbar-right" do
-          .form-group
-            = text_field_tag :email, params[:email] || "", placeholder: "Email", class: "form-control"
-          .form-group
-            = password_field_tag :password, params[:password] || "", placeholder: "Password", class: "form-control"
-          = button_tag(type: "submit", class: "btn btn-info form-control") do
-            %span.glyphicon.glyphicon-log-in
-            Sign In
+        / = form_tag sign_in_path, class: "form navbar-form navbar-right" do
+        /   .form-group
+        /     = text_field_tag :email, params[:email] || "", placeholder: "Email", class: "form-control"
+        /   .form-group
+        /     = password_field_tag :password, params[:password] || "", placeholder: "Password", class: "form-control"
+        /   = button_tag(type: "submit", class: "btn btn-info form-control") do
+        /     %span.glyphicon.glyphicon-log-in
+        /     Sign In
 
  
