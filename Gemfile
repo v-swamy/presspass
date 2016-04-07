@@ -20,6 +20,7 @@ gem 'sinatra', :require => nil
 gem 'houston'
 gem 'redis'
 gem 'stripe'
+gem 'jwt', '1.5.4'
 
 group :development do
   gem 'thin'
